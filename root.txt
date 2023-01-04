@@ -1,0 +1,68 @@
+//s19
+//.c
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+int info;
+struct node *next,*prev;
+}NODE;
+void createlist(NODE *head)
+{
+int count,n;
+NODE *last,*newnode;
+printf("\nEnter how many nodes you want to create:");
+scanf("%d",&n);
+last=head;
+for(count=1;count<=n;count++)
+{
+newnode=(NODE*)malloc(sizeof(NODE));
+printf("\nEnter the info:");
+scanf("%d",&newnode->info);
+newnode->next=head;
+newnode->prev=last;
+last->next=newnode;
+last=newnode;
+head->prev=newnode;
+}
+}
+void display(NODE *head)
+{
+NODE *temp;
+for(temp=head->next;temp!=head;temp=temp->next)
+{
+printf("%d\t",temp->info);
+}
+}
+void sortlist(NODE *head)
+{
+NODE *temp, *temp1;
+int num;
+for(temp=head->next;temp->next!=head;temp=temp->next)
+for(temp1=temp->next;temp1!=head;temp1=temp1->next)
+if(temp->info>temp1->info)
+{
+num=temp->info;
+temp->info=temp1->info;
+temp1->info=num;
+}
+}
+void main()
+{
+NODE *head;
+int choice,n,pos;
+head=(NODE*)malloc(sizeof(NODE));
+head->next=NULL;
+createlist(head)
+printf(“Before sorting:\n”);
+display(head);
+sortlist(head);
+printf(“Before sorting:\n”);
+display(head);
+}
+
+
+
+//cc filename.h
+//cc filename.c
+//  ./a.out
